@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="138.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.decimaabinario.EstadoInicialController">
+   <children>
+      <Circle layoutX="71.0" layoutY="86.0" radius="31.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.11999999731779099" green="0.5746666789054871" blue="1.0" opacity="0.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <Line endX="3.0" layoutX="37.0" layoutY="86.0" startX="-22.25" />
+      <Arc fill="#1f93ff00" layoutX="102.0" layoutY="55.0" length="270.0" radiusX="30.0" radiusY="28.0" startAngle="-90.0" stroke="BLACK" strokeType="INSIDE" />
+      <Line endX="6.0" endY="3.0" layoutX="66.0" layoutY="52.0" startX="2.5" startY="-2.25" />
+      <Line endX="1.75" endY="-10.5" layoutX="76.0" layoutY="62.0" startX="-4.0" startY="-7.0" />
+      <Label layoutX="86.0" layoutY="41.0" text="0" />
+      <Circle layoutX="71.0" layoutY="86.0" radius="22.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.11999999731779099" green="0.5746666789054871" blue="1.0" opacity="0.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <Label fx:id="labelEstado" layoutX="64.0" layoutY="78.0" text="q1" />
+      <Line fx:id="conector" endX="-40.0" endY="1.0" layoutX="142.0" layoutY="85.0" startX="-2.75" startY="1.0" />
+      <Label layoutX="10.0" layoutY="67.0" text="0,1" />
+      <Label layoutX="6.0" layoutY="86.0" text="Inicio" />
+   </children>
+</AnchorPane>

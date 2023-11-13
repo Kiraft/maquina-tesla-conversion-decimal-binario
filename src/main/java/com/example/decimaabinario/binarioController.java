@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class binarioController implements Initializable {
 
@@ -79,6 +81,7 @@ public class binarioController implements Initializable {
 
     Map<String, Double> positionsX = new HashMap<>();
     ArrayList<Integer> divisiones = new ArrayList<>();
+    static int iAux = 1;
 
 
     @FXML
@@ -100,7 +103,7 @@ public class binarioController implements Initializable {
 
         if (divisiones.get(0) % 2 == 0){
             try {
-                FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
+                FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estado_inicial.fxml"));
                 Parent EstadoRoot = EstadoLoader.load();
 
                 containerEstados.getChildren().add(EstadoRoot);
@@ -111,6 +114,7 @@ public class binarioController implements Initializable {
 
 
         for (int i = 0; i < divisiones.size(); i++) {
+            final int jAux = i;
             TranslateTransition transition = new TranslateTransition(Duration.seconds(1), flecha);
             TranslateTransition transition2 = new TranslateTransition(Duration.seconds(1), flecha);
 
@@ -185,24 +189,40 @@ public class binarioController implements Initializable {
             transition.setOnFinished(e -> {
                 resultadoBinario.insert(0, currentResidue % 2);
                 binario.setText(resultadoBinario.toString());
-                if (currentResidue % 2 == 0) {
+                if (jAux != (divisiones.size()-1)){
+                    if (currentResidue % 2 == 0) {
+                    } else {
 
-                } else {
+                        try {
+                            FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estado.fxml"));
+                            Parent EstadoRoot = EstadoLoader.load();
 
-                    try {
-                        FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
-                        Parent EstadoRoot = EstadoLoader.load();
+                            EstadoController estadoController = EstadoLoader.getController();
+                            estadoController.setEstado(iAux);
+                            containerEstados.getChildren().add(EstadoRoot);
+                            iAux++;
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }else {
+                    if (currentResidue % 2 == 0) {
+                    } else {
 
+                        try {
+                            FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estado_final.fxml"));
+                            Parent EstadoRoot = EstadoLoader.load();
 
-//                    CardPlatilloController cardPlatilloController = cardPlatilloLoader.getController();
-//                    cardPlatilloController.setElementoMenu(em);
-//                cardPlatilloController.setMenuController(menuController);
-
-                        containerEstados.getChildren().add(EstadoRoot);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                            EstadoFinalController estadoController = EstadoLoader.getController();
+                            estadoController.setEstado(iAux);
+                            containerEstados.getChildren().add(EstadoRoot);
+                            iAux++;
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
+
             });
             seqTransition.getChildren().add(transition);
         }
@@ -224,9 +244,9 @@ public class binarioController implements Initializable {
         seqTransition.getChildren().add(transition3);
 
         seqTransition.play();
+        iAux = 1;
+
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

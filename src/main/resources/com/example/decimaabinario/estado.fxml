@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="121.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="121.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.decimaabinario.EstadoController">
    <children>
       <Circle layoutX="53.0" layoutY="86.0" radius="31.0" stroke="BLACK" strokeType="INSIDE">
          <fill>
@@ -52,7 +52,8 @@
             </LinearGradient>
          </fill>
       </Circle>
-      <Label layoutX="46.0" layoutY="78.0" text="q1" />
-      <Line endX="-40.0" endY="1.0" layoutX="124.0" layoutY="85.0" startX="-2.75" startY="1.0" />
+      <Label fx:id="labelEstado" layoutX="46.0" layoutY="78.0" text="q1" />
+      <Line fx:id="conector" endX="-40.0" endY="1.0" layoutX="124.0" layoutY="85.0" startX="-2.75" startY="1.0" />
+      <Label layoutX="6.0" layoutY="64.0" text="1" />
    </children>
 </AnchorPane>
