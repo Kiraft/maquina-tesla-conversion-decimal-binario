@@ -80,7 +80,6 @@ public class binarioController implements Initializable {
     Map<String, Double> positionsX = new HashMap<>();
     ArrayList<Integer> divisiones = new ArrayList<>();
 
-//    TranslateTransition transition;
 
     @FXML
     void convertir(ActionEvent event) {
@@ -97,8 +96,19 @@ public class binarioController implements Initializable {
             divisiones.add(numeroDecimal);
         }
 
-//        Collections.reverse(divisiones);
         StringBuilder resultadoBinario = new StringBuilder();
+
+        if (divisiones.get(0) % 2 == 0){
+            try {
+                FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
+                Parent EstadoRoot = EstadoLoader.load();
+
+                containerEstados.getChildren().add(EstadoRoot);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
 
         for (int i = 0; i < divisiones.size(); i++) {
             TranslateTransition transition = new TranslateTransition(Duration.seconds(1), flecha);
@@ -164,31 +174,35 @@ public class binarioController implements Initializable {
             });
 
             seqTransition.getChildren().add(transition2);
-            System.out.println(ultimoResultado);
 
             if (ultimoResultado % 2 == 0) {
                 transition.setToX(positionsX.get("ceroX"));
             } else {
                 transition.setToX(positionsX.get("unoX"));
-                try {
-                    FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
-                    Parent EstadoRoot = EstadoLoader.load();
-
-//                    CardPlatilloController cardPlatilloController = cardPlatilloLoader.getController();
-//                    cardPlatilloController.setElementoMenu(em);
-//                cardPlatilloController.setMenuController(menuController);
-
-                    containerEstados.getChildren().add(EstadoRoot);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
             }
 
             final int currentResidue = ultimoResultado;
             transition.setOnFinished(e -> {
                 resultadoBinario.insert(0, currentResidue % 2);
                 binario.setText(resultadoBinario.toString());
+                if (currentResidue % 2 == 0) {
 
+                } else {
+
+                    try {
+                        FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
+                        Parent EstadoRoot = EstadoLoader.load();
+
+
+//                    CardPlatilloController cardPlatilloController = cardPlatilloLoader.getController();
+//                    cardPlatilloController.setElementoMenu(em);
+//                cardPlatilloController.setMenuController(menuController);
+
+                        containerEstados.getChildren().add(EstadoRoot);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
             });
             seqTransition.getChildren().add(transition);
         }
@@ -216,7 +230,6 @@ public class binarioController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        transition = new TranslateTransition(Duration.seconds(1), flecha);
         positionsX.put("ceroX", 325.0);
         positionsX.put("dosX", 270.0);
         positionsX.put("cuatroX", 215.0);
@@ -231,18 +244,15 @@ public class binarioController implements Initializable {
         positionsX.put("milX", -275.0);
         positionsX.put("unoX", -328.0);
 
-        try {
-            FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
-            Parent EstadoRoot = EstadoLoader.load();
+//        try {
+//            FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
+//            Parent EstadoRoot = EstadoLoader.load();
+//
+//            containerEstados.getChildren().add(EstadoRoot);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
 
-//                    CardPlatilloController cardPlatilloController = cardPlatilloLoader.getController();
-//                    cardPlatilloController.setElementoMenu(em);
-//                cardPlatilloController.setMenuController(menuController);
-
-            containerEstados.getChildren().add(EstadoRoot);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 }
 
