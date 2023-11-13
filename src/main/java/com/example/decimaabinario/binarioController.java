@@ -4,7 +4,9 @@ import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -28,6 +31,9 @@ public class binarioController implements Initializable {
 
     @FXML
     private Label cien;
+
+    @FXML
+    private HBox containerEstados;
 
     @FXML
     private HBox contenedorCinta;
@@ -78,6 +84,7 @@ public class binarioController implements Initializable {
 
     @FXML
     void convertir(ActionEvent event) {
+        containerEstados.getChildren().clear();
         int numeroDecimal = Integer.parseInt(txtDecimal.getText());
 
         divisiones.clear();
@@ -122,6 +129,39 @@ public class binarioController implements Initializable {
                 transition2.setToX(positionsX.get("dosX"));
             }
 
+            transition2.setOnFinished(e -> {
+                if (ultimoResultado >= 513 && ultimoResultado <= 1024) {
+                    mil.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("milX"));
+                } else if (ultimoResultado >= 257 && ultimoResultado <= 512) {
+                    quinientos.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("quinientosX"));
+                } else if (ultimoResultado >= 129 && ultimoResultado <= 256) {
+                    doscientos.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("docientosX"));
+                } else if (ultimoResultado >= 65 && ultimoResultado <= 128) {
+                    cien.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("cienX"));
+                } else if (ultimoResultado >= 33 && ultimoResultado <= 64) {
+                    sesenta.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("sesentaX"));
+                } else if (ultimoResultado >= 17 && ultimoResultado <= 32) {
+                    treinta.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("treintaX"));
+                } else if (ultimoResultado >= 9 && ultimoResultado <= 16) {
+                    dies.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("diesX"));
+                } else if (ultimoResultado >= 5 && ultimoResultado <= 8) {
+                    ocho.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("ochoX"));
+                } else if (ultimoResultado >= 3 && ultimoResultado <= 4) {
+                    cuatro.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("cuatroX"));
+                } else if (ultimoResultado >= 1 && ultimoResultado <= 2) {
+                    dos.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    transition2.setToX(positionsX.get("dosX"));
+                }
+            });
 
             seqTransition.getChildren().add(transition2);
             System.out.println(ultimoResultado);
@@ -130,17 +170,43 @@ public class binarioController implements Initializable {
                 transition.setToX(positionsX.get("ceroX"));
             } else {
                 transition.setToX(positionsX.get("unoX"));
+                try {
+                    FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
+                    Parent EstadoRoot = EstadoLoader.load();
+
+//                    CardPlatilloController cardPlatilloController = cardPlatilloLoader.getController();
+//                    cardPlatilloController.setElementoMenu(em);
+//                cardPlatilloController.setMenuController(menuController);
+
+                    containerEstados.getChildren().add(EstadoRoot);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             final int currentResidue = ultimoResultado;
             transition.setOnFinished(e -> {
                 resultadoBinario.insert(0, currentResidue % 2);
                 binario.setText(resultadoBinario.toString());
+
             });
             seqTransition.getChildren().add(transition);
         }
         TranslateTransition transition3 = new TranslateTransition(Duration.seconds(1), flecha);
         transition3.setToX(positionsX.get("inicioX"));
+        transition3.setOnFinished(e -> {
+             mil.setStyle("-fx-border-color: #000000");
+             quinientos.setStyle("-fx-border-color: #000000");
+             doscientos.setStyle("-fx-border-color: #000000");
+             cien.setStyle("-fx-border-color: #000000");
+             sesenta.setStyle("-fx-border-color: #000000");
+             treinta.setStyle("-fx-border-color: #000000");
+             dies.setStyle("-fx-border-color: #000000");
+             ocho.setStyle("-fx-border-color: #000000");
+             cuatro.setStyle("-fx-border-color: #000000");
+             dos.setStyle("-fx-border-color: #000000");
+        });
+
         seqTransition.getChildren().add(transition3);
 
         seqTransition.play();
@@ -164,6 +230,19 @@ public class binarioController implements Initializable {
         positionsX.put("quinientosX", -220.0);
         positionsX.put("milX", -275.0);
         positionsX.put("unoX", -328.0);
+
+        try {
+            FXMLLoader EstadoLoader = new FXMLLoader(App.class.getResource("estadoInicial.fxml"));
+            Parent EstadoRoot = EstadoLoader.load();
+
+//                    CardPlatilloController cardPlatilloController = cardPlatilloLoader.getController();
+//                    cardPlatilloController.setElementoMenu(em);
+//                cardPlatilloController.setMenuController(menuController);
+
+            containerEstados.getChildren().add(EstadoRoot);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
 
