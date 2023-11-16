@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -21,6 +22,9 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class binarioController implements Initializable {
+
+    @FXML
+    private TextArea txtArea;
 
     @FXML
     private Label binario;
@@ -86,6 +90,7 @@ public class binarioController implements Initializable {
 
     @FXML
     void convertir(ActionEvent event) {
+        txtArea.setText("");
         containerEstados.getChildren().clear();
         int numeroDecimal = Integer.parseInt(txtDecimal.getText());
 
@@ -239,12 +244,18 @@ public class binarioController implements Initializable {
              ocho.setStyle("-fx-border-color: #000000");
              cuatro.setStyle("-fx-border-color: #000000");
              dos.setStyle("-fx-border-color: #000000");
+            txtArea.setText("Se cumple el Teorema 1 en al contener cintas en los que da vuelta\n" +
+                    "Teorema 2: Se cumple al ser determinista, hay un numero determinado de digitos binarios\n" +
+                    "Teorema 3: Se cumple al llevar pila para las divisiones y una para el conteo de recorridos\n" +
+                    "Teorema 4: Lle va un contador para las divisiones, uno para los digitos binarios y uno para el contador de vueltas\n" +
+                    "Teorema 5: Se cumple al llevar mas de dos contadores");
         });
 
         seqTransition.getChildren().add(transition3);
 
         seqTransition.play();
         iAux = 1;
+
 
     }
 
