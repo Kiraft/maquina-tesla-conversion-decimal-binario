@@ -244,7 +244,7 @@ public class binarioController implements Initializable {
              ocho.setStyle("-fx-border-color: #000000");
              cuatro.setStyle("-fx-border-color: #000000");
              dos.setStyle("-fx-border-color: #000000");
-            txtArea.setText("Se cumple el Teorema 1 en al contener cintas en los que da vuelta\n" +
+            txtArea.setText("Se cumplearon los siguientes teoremas: Teorema 1 en al contener cintas en los que da vuelta\n" +
                     "Teorema 2: Se cumple al ser determinista, hay un numero determinado de digitos binarios\n" +
                     "Teorema 3: Se cumple al llevar pila para las divisiones y una para el conteo de recorridos\n" +
                     "Teorema 4: Lle va un contador para las divisiones, uno para los digitos binarios y uno para el contador de vueltas\n" +
